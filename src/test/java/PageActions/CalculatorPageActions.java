@@ -1,31 +1,34 @@
 package PageActions;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import PageObjects.CalculatorPageObjects;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.TestException;
 import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.commons.io.FileUtils;
+import java.sql.Timestamp;
 
 public class CalculatorPageActions {
     CalculatorPageObjects pageObject = new CalculatorPageObjects();
     SoftAssert softAssert = new SoftAssert();
 
-    public WebDriver launchApplication(WebDriver driver, String baseURL) {
+    public WebDriver launchApplication(WebDriver driver, String baseURL) throws Exception {
         System.setProperty("webdriver.chrome.driver", pageObject.chromeDriverPath);
         driver = new ChromeDriver();
         driver.get(baseURL);
         driver.manage().window().maximize();
+        takeSnapShot(driver,"Step_ApplicationLaunch");
         return driver;
+
     }
 
-    public void selectApplicationType(WebDriver driver, String applicationType) {
+    public void selectApplicationType(WebDriver driver, String applicationType) throws Exception {
         if(applicationType.equalsIgnoreCase( "Single")) {
             driver.findElement(By.id(pageObject.applicationTypeSingle)).click();
         } else if (applicationType.equalsIgnoreCase( "Joint")){
@@ -34,14 +37,16 @@ public class CalculatorPageActions {
             // throw exception - application type
             System.out.println("Test data issue;" + applicationType +" Not a valid application type");
         }
+        takeSnapShot(driver,"Step_SelectApplicationType");
     }
 
-    public void selectNumberOfDependents(WebDriver driver, String testDataNumberOfDependents) {
+    public void selectNumberOfDependents(WebDriver driver, String testDataNumberOfDependents) throws Exception {
         Select numberOfDependants = new Select(driver.findElement(By.xpath(pageObject.numberOfDependantsInYourDetails)));
         numberOfDependants.selectByVisibleText(testDataNumberOfDependents);
+        takeSnapShot(driver,"Step_SelectDependents");
     }
 
-    public void selectBorrowType(WebDriver driver, String borrowType) {
+    public void selectBorrowType(WebDriver driver, String borrowType) throws Exception {
         if(borrowType.equalsIgnoreCase("Home to live in")){
             driver.findElement(By.id(pageObject.borrowTypeHome)).click();
         } else if(borrowType.equalsIgnoreCase("Residential Investment")) {
@@ -50,83 +55,73 @@ public class CalculatorPageActions {
             // throw exception - borrow type
             System.out.println("Test data issue;" + borrowType +" Not a valid application type");
         }
+        takeSnapShot(driver,"Step_SelectBorrowType");
     }
 
-    public void enterIncomeBeforeTax(WebDriver driver, String incomeBeforeTax) {
+    public void enterIncomeBeforeTax(WebDriver driver, String incomeBeforeTax) throws Exception {
         driver.findElement(By.xpath(pageObject.incomeBeforeTaxField)).clear();
         driver.findElement(By.xpath(pageObject.incomeBeforeTaxField)).sendKeys(incomeBeforeTax);
+        takeSnapShot(driver,"Step_EnterIncome");
     }
 
-    public void enterOtherIncome(WebDriver driver, String otherIncome) {
+    public void enterOtherIncome(WebDriver driver, String otherIncome) throws Exception {
         driver.findElement(By.xpath(pageObject.otherIncomeField)).clear();
         driver.findElement(By.xpath(pageObject.otherIncomeField)).sendKeys(otherIncome);
+        takeSnapShot(driver,"Step_EnterOtherIncome");
     }
 
-    public void enterLivingExpenses(WebDriver driver, String livingExpenses){
+    public void enterLivingExpenses(WebDriver driver, String livingExpenses) throws Exception {
         driver.findElement(By.xpath(pageObject.livingExpensesField)).clear();
         driver.findElement(By.xpath(pageObject.livingExpensesField)).sendKeys(livingExpenses);
+        takeSnapShot(driver,"Step_EnterLivingExpense");
     }
 
-    public void enterCurrentHomeLoanRepayments(WebDriver driver, String currentHomeLoanRepayments) {
+    public void enterCurrentHomeLoanRepayments(WebDriver driver, String currentHomeLoanRepayments) throws Exception {
         driver.findElement(By.xpath(pageObject.currentHomeLoanRepaymentsField)).clear();
         driver.findElement(By.xpath(pageObject.currentHomeLoanRepaymentsField)).sendKeys(currentHomeLoanRepayments);
+        takeSnapShot(driver,"Step_EnterHomeLoanRepayment");
     }
 
-    public void enterOtherLoanRepayments(WebDriver driver, String otherLoanRepayments) {
+    public void enterOtherLoanRepayments(WebDriver driver, String otherLoanRepayments) throws Exception {
         driver.findElement(By.xpath(pageObject.otherLoanRepaymentsField)).clear();
         driver.findElement(By.xpath(pageObject.otherLoanRepaymentsField)).sendKeys(otherLoanRepayments);
+        takeSnapShot(driver,"Step_EnterOtherLoanRepayment");
     }
 
-    public void enterOtherCommitments(WebDriver driver, String otherCommitments) {
+    public void enterOtherCommitments(WebDriver driver, String otherCommitments) throws Exception {
         driver.findElement(By.xpath(pageObject.otherCommitmentsField)).clear();
         driver.findElement(By.xpath(pageObject.otherCommitmentsField)).sendKeys(otherCommitments);
+        takeSnapShot(driver,"Step_EnterOtherCommitments");
     }
 
-    public void enterTotalCreditCardLimits(WebDriver driver, String totalCreditCardLimits) {
+    public void enterTotalCreditCardLimits(WebDriver driver, String totalCreditCardLimits) throws Exception {
         driver.findElement(By.xpath(pageObject.totalCreditCardLimitsField)).clear();
         driver.findElement(By.xpath(pageObject.totalCreditCardLimitsField)).sendKeys(totalCreditCardLimits);
+        takeSnapShot(driver,"Step_EnterCreditCardLimit");
     }
 
-    public void clickWorkOutHowMuchICouldBorrowButton(WebDriver driver, String workOutHowMuchICouldBorrowButton) {
+    public void clickWorkOutHowMuchICouldBorrowButton(WebDriver driver, String workOutHowMuchICouldBorrowButton) throws Exception {
         driver.findElement(By.xpath(pageObject.workOutHowMuchICouldBorrowButton)).click();
+        takeSnapShot(driver,"Step_ClickWorkOut");
     }
 
-    public void validateBorrowingEstimate(WebDriver driver, String expectedBorrowingEstimate) {
+    public void validateBorrowingEstimate(WebDriver driver, String expectedBorrowingEstimate) throws Exception {
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.attributeToBe(By.xpath(pageObject.borrowingEstimatePresenceIdentifier),"aria-live","assertive"));
         String actualBorrowingEstimate = driver.findElement(By.id(pageObject.borrowingEstimateIdentifier)).getText();
-        System.out.println("actual borrowing estimate: " + actualBorrowingEstimate + "; Comparison Output: " + actualBorrowingEstimate.equals(expectedBorrowingEstimate));
         softAssert.assertEquals(actualBorrowingEstimate,expectedBorrowingEstimate, "Assert Result");
         softAssert.assertAll();
-        try {
-            if (expectedBorrowingEstimate.equals(actualBorrowingEstimate)) {
-                System.out.println("Test PASSED; Expected Borrowing Estimate: " + expectedBorrowingEstimate + " matches the Actual Borrowing Estimate: " + actualBorrowingEstimate);
-            } else {
-                throw new TestException("Value mismatch");
-            }
-        }
-        catch (TestException exception){
-            System.out.print("Test FAILED; Expected Borrowing Estimate: " + expectedBorrowingEstimate + " did not match the Actual Borrowing Estimate: " + actualBorrowingEstimate);
-        }
+        takeSnapShot(driver,"Step_ValidateBorrowEstimate");
+
     }
 
-    public void validateMessage(WebDriver driver, String expectedMessage) {
+    public void validateMessage(WebDriver driver, String expectedMessage) throws Exception {
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.attributeToBe(By.xpath(pageObject.messageIdentifier),"aria-live","assertive"));
         String actualMessage = driver.findElement(By.xpath(pageObject.messageIdentifier)).getText();
-        System.out.println("actual message: " + actualMessage);
         softAssert.assertEquals(actualMessage,expectedMessage, "Assert Result");
         softAssert.assertAll();
-        try {
-            if (expectedMessage.equals(actualMessage)) {
-                System.out.println("Test PASSED; Expected Message: " + expectedMessage + " matches the Actual Message: " + actualMessage);
-            } else {
-                throw new TestException("Value mismatch");
-            }
-        }
-        catch (TestException exception){
-            System.out.print("Test FAILED; Expected Message: " + expectedMessage + " did not match the Actual Message: " + actualMessage);
-        }
+        takeSnapShot(driver,"Step_ValidateMessage");
     }
 
     public void closeBrowser(WebDriver driver) {
@@ -134,13 +129,14 @@ public class CalculatorPageActions {
         driver.quit();
     }
 
-    public void clickStartOver(WebDriver driver){
+    public void clickStartOver(WebDriver driver) throws Exception {
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(pageObject.startOverIdentifier)));
         driver.findElement(By.xpath(pageObject.startOverIdentifier)).click();
+        takeSnapShot(driver,"Step_ClickStartOver");
     }
 
-    public void validateClearForm(WebDriver driver) {
+    public void validateClearForm(WebDriver driver) throws Exception {
         //Asserting application type
         boolean defaultApplicationTypeValue = driver.findElement(By.id(pageObject.applicationTypeSingle)).isSelected();
         softAssert.assertTrue(defaultApplicationTypeValue, "Default application type is enabled");
@@ -192,6 +188,16 @@ public class CalculatorPageActions {
         softAssert.assertEquals(defaultTotalCreditLimitValue, expectedTotalCreditLimitValue, "TEST FAILED! Your total credit limit field is not set to default value");
 
         softAssert.assertAll();
+        takeSnapShot(driver,"Step_ClearForm");
 
+    }
+
+    public void takeSnapShot(WebDriver webdriver,String fileName) throws Exception {
+        long timestamp = System.currentTimeMillis();
+        String fileWithPath = pageObject.screenShotsPath + fileName + "_" + timestamp + ".png";
+        TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        File DestFile=new File(fileWithPath);
+        FileUtils.copyFile(SrcFile, DestFile);
     }
 }
