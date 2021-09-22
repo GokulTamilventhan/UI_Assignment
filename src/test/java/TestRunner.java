@@ -1,7 +1,9 @@
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(

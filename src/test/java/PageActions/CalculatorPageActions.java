@@ -1,6 +1,7 @@
 package PageActions;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import PageObjects.CalculatorPageObjects;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.commons.io.FileUtils;
 import java.sql.Timestamp;
+import cucumber.api.java.Before;
 
 public class CalculatorPageActions {
     CalculatorPageObjects pageObject = new CalculatorPageObjects();
@@ -110,8 +112,8 @@ public class CalculatorPageActions {
         wait.until(ExpectedConditions.attributeToBe(By.xpath(pageObject.borrowingEstimatePresenceIdentifier),"aria-live","assertive"));
         String actualBorrowingEstimate = driver.findElement(By.id(pageObject.borrowingEstimateIdentifier)).getText();
         softAssert.assertEquals(actualBorrowingEstimate,expectedBorrowingEstimate, "Assert Result");
-        softAssert.assertAll();
         takeSnapShot(driver,"Step_ValidateBorrowEstimate");
+        softAssert.assertAll();
 
     }
 
@@ -120,8 +122,9 @@ public class CalculatorPageActions {
         wait.until(ExpectedConditions.attributeToBe(By.xpath(pageObject.messageIdentifier),"aria-live","assertive"));
         String actualMessage = driver.findElement(By.xpath(pageObject.messageIdentifier)).getText();
         softAssert.assertEquals(actualMessage,expectedMessage, "Assert Result");
-        softAssert.assertAll();
         takeSnapShot(driver,"Step_ValidateMessage");
+        softAssert.assertAll();
+
     }
 
     public void closeBrowser(WebDriver driver) {
@@ -186,9 +189,9 @@ public class CalculatorPageActions {
         String defaultTotalCreditLimitValue = "0";
         String expectedTotalCreditLimitValue = driver.findElement(By.xpath(pageObject.totalCreditCardLimitsField)).getAttribute("value");
         softAssert.assertEquals(defaultTotalCreditLimitValue, expectedTotalCreditLimitValue, "TEST FAILED! Your total credit limit field is not set to default value");
-
-        softAssert.assertAll();
         takeSnapShot(driver,"Step_ClearForm");
+        softAssert.assertAll();
+
 
     }
 
@@ -200,4 +203,5 @@ public class CalculatorPageActions {
         File DestFile=new File(fileWithPath);
         FileUtils.copyFile(SrcFile, DestFile);
     }
+
 }

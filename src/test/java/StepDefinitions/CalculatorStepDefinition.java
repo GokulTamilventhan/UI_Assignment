@@ -7,6 +7,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import cucumber.api.java.After;
 
 public class CalculatorStepDefinition {
     String baseURL = "https://www.anz.com.au/personal/home-loans/calculators-tools/much-borrow/";
@@ -98,6 +101,7 @@ public class CalculatorStepDefinition {
 
     }
 
+    @After
     @Then("^I close the browser$")
     public void i_close_the_browser() throws Throwable {
         pageAction.closeBrowser(driver);

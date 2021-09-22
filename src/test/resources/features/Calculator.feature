@@ -3,7 +3,6 @@
     @Testcase1 @Testcase3 @TestSuite
     Scenario Outline: Verification of borrowing estimate calculation
       Given the borrowing calculator webpage is launched
-      # When the webpage is completely loaded
       When a person selects application type as "<applicationType>"
       And a person selects the number of dependents as "<noOfDependents>"
       And a person selects property you would to buy as "<property>"
@@ -16,7 +15,6 @@
       And a person enters total credit limit as "<totalCreditLimit>"
       And the person clicks on the button "Work out how much I could borrow"
       Then I validate that the borrowing estimate is equal to "<expectedValue>" and "<validateMessage>"
-      Then I close the browser
 
       Examples:
         | applicationType | noOfDependents | property        | income | otherIncome | expenses | homeLoanRepaymentAmount | otherLoanRepayment | otherCommitments | totalCreditLimit | expectedValue                                                                                                                                                   | validateMessage |
@@ -27,7 +25,6 @@
     @Testcase2Part1 @TestSuite
     Scenario Outline: Start over button clears the form when valid inputs are given
       Given the borrowing calculator webpage is launched
-      # When the webpage is completely loaded
       When a person selects application type as "<applicationType>"
       And a person selects the number of dependents as "<noOfDependents>"
       And a person selects property you would to buy as "<property>"
@@ -41,7 +38,6 @@
       And the person clicks on the button "Work out how much I could borrow"
       Then I click on "Start Over" to clear the form
       Then I validate if the start over button clears the form
-      Then I close the browser
 
       Examples:
         | applicationType | noOfDependents | property        | income | otherIncome | expenses | homeLoanRepaymentAmount | otherLoanRepayment | otherCommitments | totalCreditLimit | expectedBorrowingEstimate |  |
@@ -51,7 +47,6 @@
     @Testcase2Part2 @TestSuite
     Scenario Outline: Start over button clears the form when insufficient inputs are given
       Given the borrowing calculator webpage is launched
-      # When the webpage is completely loaded
       When a person selects application type as "<applicationType>"
       And a person selects the number of dependents as "<noOfDependents>"
       And a person selects property you would to buy as "<property>"
@@ -59,7 +54,6 @@
       And the person clicks on the button "Work out how much I could borrow"
       Then I click on "Start Over" to clear the form
       Then I validate if the start over button clears the form
-      Then I close the browser
 
       Examples:
         | applicationType | noOfDependents | property        | income | otherIncome | expenses | homeLoanRepaymentAmount | otherLoanRepayment | otherCommitments | totalCreditLimit | expectedBorrowingEstimate |  |
