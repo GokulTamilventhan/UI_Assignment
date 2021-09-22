@@ -1,15 +1,17 @@
 # READ ME
-# Prerequisite:
-JDK: 17
-IDE: IntelliJ
-Plugins for intelliJ: Cucumber for java, maven, gherkin
-Maven dependencies for cucumber, junit and selenium
+# Prerequisite:  
+JDK: 17  
+IDE: IntelliJ  
+Plugins for intelliJ: Cucumber for java, maven, gherkin  
+Maven dependencies for cucumber, junit and selenium  
+Chrome brower version: 93.0.4577.82; Chrome webdriver version:  93.0.4577.63
 
 # Executing the test cases:
-1.	Open Calculator.feature file and mention a tag prefixing ‘@’ before each test cases to run the test cases separately or provide a common tag before ‘Feature’ line to run all test cases sequencially.
-2.	Open Test Runner file and enter the same tag in feature file under tags.
-3.	Save the file. Right click on Test runner file and click on Run Test Runner. The test cases will start to execute, and the cucumber report will be generated under target folder in the project.
-Note: Test Runner file is already set with appropriate tags and ready for execution.
+1.	Open the project in the IDE and load the maven project dependencies(pom.xml). Open Calculator.feature file and mention a tag prefixing ‘@’ before each test cases to run the test cases separately or provide a common tag before ‘Feature’ line to run all test cases sequencially.
+2.	Open Test Runner file and enter the same tag in @CucumberOptions under tags.
+3.	Save the file. Right click on Test runner file and click on Run Test Runner. The test cases will start to execute, and the cucumber report will be generated after the completion of test run under the target folder in the project.
+4. Cucumber report path: /target/cucumber-reports/cucumber-pretty/index.html; ScreenShots path: /screenCapture ; Chrome WebDriver path: /chromeDriver  
+**Note:** Test Runner file is already set with appropriate tags and ready for execution.
 
 # Question and Answer Section
 # 1. What other test cases would you suggest?
