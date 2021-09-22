@@ -39,4 +39,4 @@ Note: Test Runner file is already set with appropriate tags and ready for execut
 -	The speed can be improved by disabling images using browser settings to test functional flow.
 
 # 3. Sometimes UI tests can fail unpredictably. For example, the page may not have the fully loaded before test automation attempts to click a button on a webpage. How would you improve the reliability of these tests?
-Implicit and explicit waits can be used to wait until the entire page is loaded. Implicit wait waits for the certain amount of time specified whereas the explicit wait waits until the expected conditions are met. Based on the test case, these can be used.
+Implicit and explicit waits can be used to wait until the entire page is loaded. Implicit wait waits for the certain amount of time specified whereas the explicit wait waits until the expected conditions are met. Based on the test case, these can be used. Exception handling and logging can be implemented to stabilise the scripts.
