@@ -1,6 +1,6 @@
 # READ ME
 # Prerequisite:  
-JDK: 17  
+JDK: 15  
 IDE: IntelliJ  
 Plugins for intelliJ: Cucumber for java, maven, gherkin  
 Maven dependencies for cucumber, junit and selenium  
