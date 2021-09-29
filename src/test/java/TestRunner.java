@@ -1,8 +1,6 @@
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
+import org.junit.runner.RunWith;;
 
 
 @RunWith(Cucumber.class)
@@ -15,7 +13,7 @@ import org.testng.annotations.AfterTest;
                 "json:target/cucumber-reports/CucumberTestReport.json",
                 "junit:target/cucumber-reports/CucumberTestReport.xml"
         },
-        tags={"@TestSuite"}
+        tags={"@testSuite"}
 )
 public class TestRunner {
 

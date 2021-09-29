@@ -1,20 +1,14 @@
 package PageActions;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import PageObjects.CalculatorPageObjects;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.TestException;
 import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.commons.io.FileUtils;
-import java.sql.Timestamp;
-import cucumber.api.java.Before;
 
 public class CalculatorPageActions {
     CalculatorPageObjects pageObject = new CalculatorPageObjects();
@@ -32,9 +26,13 @@ public class CalculatorPageActions {
 
     public void selectApplicationType(WebDriver driver, String applicationType) throws Exception {
         if(applicationType.equalsIgnoreCase( "Single")) {
-            driver.findElement(By.id(pageObject.applicationTypeSingle)).click();
+            if(!driver.findElement(By.id(pageObject.applicationTypeSingle)).isSelected()) {
+                driver.findElement(By.id(pageObject.applicationTypeSingle)).click();
+            }
         } else if (applicationType.equalsIgnoreCase( "Joint")){
-            driver.findElement(By.id(pageObject.applicationTypeJoint)).click();
+            if(!driver.findElement(By.id(pageObject.applicationTypeJoint)).isSelected()) {
+                driver.findElement(By.id(pageObject.applicationTypeJoint)).click();
+            }
         } else {
             // throw exception - application type
             System.out.println("Test data issue;" + applicationType +" Not a valid application type");
@@ -50,9 +48,13 @@ public class CalculatorPageActions {
 
     public void selectBorrowType(WebDriver driver, String borrowType) throws Exception {
         if(borrowType.equalsIgnoreCase("Home to live in")){
-            driver.findElement(By.id(pageObject.borrowTypeHome)).click();
+            if(!driver.findElement(By.id(pageObject.borrowTypeHome)).isSelected()) {
+                driver.findElement(By.id(pageObject.borrowTypeHome)).click();
+            }
         } else if(borrowType.equalsIgnoreCase("Residential Investment")) {
-            driver.findElement(By.id(pageObject.borrowTypeInvestment)).click();
+            if(!driver.findElement(By.id(pageObject.borrowTypeInvestment)).isSelected()) {
+                driver.findElement(By.id(pageObject.borrowTypeInvestment)).click();
+            }
         } else {
             // throw exception - borrow type
             System.out.println("Test data issue;" + borrowType +" Not a valid application type");
